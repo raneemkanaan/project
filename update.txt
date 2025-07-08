@@ -1,0 +1,72 @@
+update public.floor
+set "level " = "level " +1
+from   public.venue 
+Where floor."id " = venue."id "
+and venue."id "=1
+
+	
+update public.node
+set is_deleted = true
+ from public.floor 
+Where floor."id " = node."id "
+and floor."id "=2
+
+
+update public.node
+set node_type = 'escalator' 
+from   public.venue 
+Where node."id " = venue."id "
+and venue."id "=1
+
+
+
+	update public.line
+set "is_deleted " = true
+from   public.node
+Where node."id " = line.id 
+and node_type='elevator'
+
+
+update public.node
+set x=x+10.0
+, y=y+10.0
+from   public.floor
+Where node."id " = floor."id " 
+and floor."id "=3
+
+
+update public.line
+set "is_two_way "=false
+from   public.node,public.floor
+Where node."id " = line.id 
+and node."id " = floor."id "
+
+
+
+	update public.floor
+set name='update'
+from   public.venue
+Where floor."id " = venue."id "
+and venue."id " = 2
+
+
+update public.venue
+set "is_deleted "=true
+from   public.floor
+Where floor."id " = venue."id "
+and floor."is_deleted "= false
+
+
+
+	update public.node
+set node_type= 'normal' 
+where x is null or y is null
+
+
+
+	update public.floor
+set "level "=0
+from public.venue
+Where floor."id " = venue."id "
+and mod (venue."id ",2)  = 0
+
