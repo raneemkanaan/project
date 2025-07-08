@@ -1,30 +1,30 @@
 DELETE FROM public.node
-	WHERE  is_deleted = true 
+	WHERE  is_deleted= true 
 	
 
 DELETE FROM public.line using public.node
 
-Where line.id = node."id " 
+Where line.id = node."id" 
 and node.node_type ='elevator'
 	
 
 DELETE FROM public.floor using public.venue
  
-Where floor."id " = venue."id "
-and "level "= 0 
+Where floor."id" = venue."id "
+and "level"= 0 
 
 and venue."id "=1
 	
 
 DELETE FROM public.venue using public.floor
  
-Where floor."id " = venue."id "
-and venue."is_deleted "!= floor."is_deleted "**As i understood with no indecator to know if it have any floors or not
+Where floor."id" = venue."id "
+and venue."is_deleted"!= floor."is_deleted" --As i understood with no indecator to know if it have any floors or not
 
 
 DELETE FROM public.line using public.node
  
-Where node."id " = line.id 
+Where node."id" = line.id 
 and node_type='stairs'
 
 
