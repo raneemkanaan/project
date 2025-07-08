@@ -1,0 +1,147 @@
+**I’m using id’s for all tables because no any indecator for numbers except ID column , so if it represent floor number or nodes number so that’s correct , if it not represent , i need another column to use it insted of ID column
+
+SELECT  name FROM public.venue; 
+
+
+SELECT  name ,"level " leval	FROM public.floor;
+
+
+SELECT  x, y FROM public.node 
+
+
+SELECT  node_type,x, y FROM public.node;
+
+
+Select * from public.node
+Where node_type = 'elevator'
+
+
+select floor.* from public.floor  , public.venue 
+Where floor."id " = venue."id "
+and venue."id "=1 
+
+
+
+select node.* from public.floor  , public.node
+Where floor."id " = node."id "
+and floor."id "=1 
+
+
+
+SELECT * FROM public.line 
+where "is_two_way "=true 
+
+
+
+select line.* from public.line , public.node 
+Where line.id = node."id " 
+and node."id "=1 
+
+
+
+select node.x,node.y,floor.name from public.floor  , public.node 
+Where floor."id " = node."id " 
+and floor."id "=1 
+
+
+select venue.name,floor.name from public.floor  , public.venue 
+Where floor."id " = venue."id "--as I understood , the floor you want is a name , if you mean level you can replace the floor.leval insted of floor.name 
+
+
+
+SELECT * FROM public.node
+where  is_deleted=false 
+
+
+SELECT * FROM public.floor
+where "is_deleted " = false 
+
+
+select venue.name from public.floor  , public.venue 
+Where floor."id " = venue."id "
+and floor."id ">=1 
+
+
+select line.* from public.line , public.node 
+Where line.id = node."id " 
+and node.node_type ='elevator'
+
+
+select venue.name from public.floor  , public.venue 
+Where floor."id " = venue."id "
+and floor."id ">2
+
+
+select node.* from public.line , public.node 
+Where line.id = node."id " 
+and line."is_two_way " =false
+
+
+select count(node.*),venue.name from public.node  , public.venue 
+Where node."id " = venue."id "
+group by venue.name
+
+
+select count(node.*),floor.name from public.node  , public.floor 
+Where node."id " = floor."id "
+group by floor.name
+
+
+
+select node.node_type,node."id " from public.floor  , public.node
+Where floor."id " = node."id "
+and node."id ">0
+  
+
+select count(floor.*) , count(node.*),venue.name from public.floor  , public.venue , public.node
+Where floor."id " = venue."id "
+and venue."id " =node."id "
+group by venue.name 
+
+
+
+ 
+select line.* from public.line , public.node 
+Where line.id = node."id " 
+and 
+**what you main in different
+
+
+select floor.name,(node.x+node.y)/2  avg from public.node  , public.floor 
+Where node."id " = floor."id "
+
+
+select venue.name from public.floor  , public.venue 
+Where floor."id " = venue."id "
+and floor."is_deleted " = false
+
+
+
+select  count(node.*) ,venue.name from public.node  , public.venue 
+Where node."id " = venue."id "
+and node.is_deleted = false
+group by venue.name
+
+
+select node.* from public.floor  , public.node
+Where floor."id " = node."id "
+and node."id "=1 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
