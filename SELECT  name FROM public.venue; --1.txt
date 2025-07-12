@@ -1,0 +1,119 @@
+SELECT  name FROM public.venue; --1
+
+SELECT  name ,"level" leval	FROM public.floor;--2
+
+SELECT  x, y FROM public.node  --3
+
+SELECT  node_type,x, y FROM public.node;--4
+
+SELECT * --5
+FROM public.node
+WHERE node_type = 'elevator';
+
+SELECT floor.* --6
+FROM public.floor
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE venue.id = 1;
+
+SELECT node.* --7
+FROM public.node
+JOIN public.floor ON node.id = floor.id
+WHERE floor.id = 1;
+
+SELECT * FROM public.line --8
+WHERE "is_two_way" = true;
+
+SELECT line.* --9
+FROM public.line
+JOIN public.node ON line.id = node.id
+WHERE node.id = 1;
+
+SELECT node.x, node.y, floor.name --10
+FROM public.floor
+JOIN public.node ON floor.id = node.id
+WHERE floor.id = 1;
+
+
+SELECT venue.name AS venue_name, floor.name AS floor_name  --11
+FROM public.floor
+JOIN public.venue ON floor.venue_id = venue.id;
+
+
+SELECT * --12
+FROM public.node    
+WHERE is_deleted = false;
+
+
+SELECT *      --13
+FROM public.floor    
+WHERE "is_deleted" = false;
+
+SELECT venue.name --14
+FROM public.floor
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE floor.id >= 1;
+
+SELECT venue.name --15
+FROM public.floor
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE floor.id >= 1;
+
+SELECT venue.name --16
+FROM public.floor
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE floor.id > 2;
+
+SELECT node.* --17
+FROM public.line, public.node 
+WHERE line.id = node."id"                                            
+  AND line."is_two_way" = false;
+
+SELECT COUNT(*), venue.name --18
+FROM public.node
+JOIN public.floor ON node.floor_id = floor.id
+JOIN public.venue ON floor.venue_id = venue.id
+GROUP BY venue.name;
+
+ SELECT COUNT(*), floor.name--19
+FROM public.node
+JOIN public.floor ON node.floor_id = floor.id
+GROUP BY floor.name;
+
+SELECT node.node_type, node.id --20
+FROM public.node
+JOIN public.floor ON node.floor_id = floor.id
+WHERE node.id > 0;
+
+SELECT               --21
+  COUNT(DISTINCT floor.id) AS floor_count,
+  COUNT(node.id) AS node_count,
+  venue.name
+FROM public.venue
+JOIN public.floor ON floor.venue_id = venue.id
+JOIN public.node ON node.floor_id = floor.id
+GROUP BY venue.name;
+
+22
+
+SELECT floor.name, AVG((node.x + node.y) / 2) AS average_position --23
+FROM public.node
+JOIN public.floor ON node.floor_id = floor.id
+GROUP BY floor.name;
+
+SELECT venue.name --24
+FROM public.floor
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE floor.is_deleted = false;
+
+
+SELECT COUNT(node.id), venue.name --25
+FROM public.node
+JOIN public.floor ON node.floor_id = floor.id
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE node.is_deleted = false
+GROUP BY venue.name;
+
+SELECT node.* --26
+FROM public.node
+JOIN public.floor ON node.floor_id = floor.id
+WHERE node.id = 1;
