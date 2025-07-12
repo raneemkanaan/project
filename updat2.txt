@@ -186,21 +186,21 @@ update public.line
 set "is_two_way"=false
 from   public.node,public.floor
 Where node."id" = line.id 
-and node."id" = floor."id "
+and node."id" = floor."id"
 
 
 
 	update public.floor
 set name='update'
 from   public.venue
-Where floor."id" = venue."id "
+Where floor."id" = venue."id"
 and venue."id" = 2
 
 
 update public.venue
 set "is_deleted"=true
 from   public.floor
-Where floor."id" = venue."id "
+Where floor."id" = venue."id"
 and floor."is_deleted"= false
 
 
@@ -214,6 +214,6 @@ where x is null or y is null
 	update public.floor
 set "level"=0
 from public.venue
-Where floor."id" = venue."id "
-and mod (venue."id ",2)  = 0
+Where floor."id" = venue."id"
+and mod (venue."id",2)  = 0
 
