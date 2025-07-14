@@ -1,0 +1,34 @@
+DELETE FROM public.node --1
+	WHERE  is_deleted= true 
+
+
+	DELETE FROM public.line --2
+USING public.node                     
+WHERE line.first_node_id = line.id or line.first_node_id=line.id
+  AND node.node_type = 'elevator';
+
+
+  
+
+DELETE FROM public.floor --4
+USING public.venue
+WHERE floor.venue_id = venue.id
+  AND floor.level = 0
+  AND venue.id = 1;
+
+
+
+DELETE FROM public.venue v --5
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM public.floor f
+  WHERE f.venue_id = v.id
+);
+
+  
+  DELETE FROM public.line --6
+USING public.node
+WHERE line.first_node_id = line.id or line.first_node_id=line.id
+and line.is_two_way=false
+
+  AND node.node_type = 'stairs';
