@@ -1,0 +1,75 @@
+update public.floor
+set "level" = "level" +1
+from   public.venue 
+Where floor.venue_id = venue.id 
+and venue.id =1
+
+	
+update public.node
+set is_deleted= true
+ from public.floor 
+Where floor.id = node.floor_id 
+and floor.id =2
+
+UPDATE public.node 
+SET node_type = 'escalator'
+FROM public.floor 
+JOIN public.venue ON floor.venue_id = venue.id
+WHERE node.floor_id = floor.id
+  AND venue.id = 1;
+
+
+
+UPDATE public.line 
+SET is_deleted = true
+FROM public.node 
+WHERE (line.first_node_id = node.id OR line.second_node_id = node.id)
+  AND node.node_type = 'elevator';
+
+
+update public.node
+set x=x+10.0
+, y=y+10.0
+from   public.floor
+Where node.floor_id = floor.id 
+and floor.id =3
+
+
+
+
+
+UPDATE public.line 
+SET is_deleted = true
+FROM public.node 
+WHERE (line.first_node_id = node.id OR line.second_node_id = node.id)
+  AND node.id = 1;
+
+
+
+
+update public.floor
+set name='update'
+from   public.venue
+Where floor.venue_id = venue.id
+and venue.id = 2
+
+
+
+update public.venue
+set "is_deleted"=true
+from   public.floor
+Where floor.venue_id = venue.id
+and floor."is_deleted"= false
+
+
+
+	update public.node
+set node_type= 'normal' 
+where x is null or y is null
+
+
+UPDATE public.floor 
+SET level = 0
+FROM public.venue 
+WHERE floor.venue_id = venue.id
+  AND MOD(venue.id, 2) = 0;
